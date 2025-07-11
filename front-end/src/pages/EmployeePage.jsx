@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import EmployeeCard from '../components/EmployeeCard';
 import EmployeeForm from '../components/EmployeeForm';
+import { useEffect } from 'react';
 
 const EmployeePage = () => {
   const [showForm, setShowForm] = useState(false);
-  const [employeeData, setEmployeeData] = useState({
-    emp_id: 1,
-    first_name: "John",
-    last_name: "Doe",
-    job_title: "Software Engineer",
-    email: "john.doe@example.com",
-    phone_number: "123-456-7890",
-    department: "Engineering",
-    salary: 75000,
-    emp_type: "Full-Time"
-  });
+  const [employeeData, setEmployeeData] = useState([]);
+  
+      useEffect(() => {
+          const fetchData = async()=>{
+              try {
+                  const response = await fetch("http://localhost:8080/employees/");
+                  const data = await response.json();
+                  setEmployeeData(data);
+              } catch (error) {
+                  console.log(error.message)
+              }
+          }
+          fetchData();
+      },[])
+  
+      console.log(employeeData)
 
   const handleEdit = (employee) => {
     console.log("Edit employee", employee);
@@ -43,17 +49,17 @@ const EmployeePage = () => {
 
       {!showForm && (
         <>
-          <EmployeeCard
-            employee={employeeData}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
-          <button
-            onClick={() => setShowForm(true)}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Edit Employee
-          </button>
+          {employeeData.map((employee,index)=>(
+            <div key={employee.emp_id} className="mb-4">
+              <EmployeeCard
+                key={index}
+                employee={employee}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+              
+            </div>
+          ))}
         </>
       )}
 

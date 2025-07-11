@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use } from 'react';
 import PropTypes from 'prop-types';
 import {
   Edit,
@@ -10,6 +10,9 @@ import {
   DollarSign,
   Users,
 } from 'lucide-react';
+import { useEffect,useState } from 'react';
+import { employeeService } from '../api/employeeService';
+
 
 const EmployeeCard = ({ employee, onEdit, onDelete }) => {
   // Safety check: if employee prop is missing, don’t render

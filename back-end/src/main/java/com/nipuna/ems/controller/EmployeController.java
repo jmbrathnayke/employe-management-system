@@ -12,22 +12,23 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @NoArgsConstructor
-@RequestMapping("/employes")
+@RequestMapping("/employees")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class EmployeController {
 
     @Autowired
     public EmployeService employeService;
 
     //get all employee
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<?> getAllEmployee(){
         return  ResponseEntity.ok(employeService.getAllEmployee());
     }
 
     //add employee
-    @PostMapping
-    public ResponseEntity<?> addEmploye(@RequestBody EmployeModel emplye){
-        return ResponseEntity.ok(employeService.addEmploye(emplye));
+    @PostMapping("/add")
+    public ResponseEntity<?> addEmploye(@RequestBody EmployeModel employee){
+        return ResponseEntity.ok(employeService.addEmploye(employee));
     }
 
     //get employe by id
