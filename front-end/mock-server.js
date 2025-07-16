@@ -2,6 +2,7 @@
 import express from 'express';
 import cors from 'cors';
 
+// Mock data for employees
 const app = express();
 const PORT = 8080;
 
@@ -138,6 +139,7 @@ app.get('/health', (req, res) => {
 });
 
 // Start server
+//
 app.listen(PORT, () => {
   console.log(`🚀 Mock Employee API Server running on http://localhost:${PORT}`);
   console.log(`📋 Available endpoints:`);
