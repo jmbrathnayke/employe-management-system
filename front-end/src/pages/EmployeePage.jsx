@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import EmployeeCard from '../components/EmployeeCard';
 import EmployeeForm from '../components/EmployeeForm';
 import { useEffect } from 'react';
+import { employeeService } from '../api/employeeService';
+// import { mockEmployeeService as employeeService } from '../api/mockEmployeeService';
 
 const EmployeePage = () => {
   const [showForm, setShowForm] = useState(false);
@@ -10,8 +12,7 @@ const EmployeePage = () => {
       useEffect(() => {
           const fetchData = async()=>{
               try {
-                  const response = await fetch("http://localhost:8080/employees/");
-                  const data = await response.json();
+                  const data = await employeeService.getAllEmployees();
                   setEmployeeData(data);
               } catch (error) {
                   console.log(error.message)

@@ -1,11 +1,11 @@
 // API Service for Employee Management
-const API_BASE_URL = 'http://localhost:8080/employees';
+const API_BASE_URL = '/api/employees';
 
 export const employeeService = {
   // Get all employees
   getAllEmployees: async () => {
     try {
-      const response = await fetch("http://localhost:8080/employees/");
+      const response = await fetch(`${API_BASE_URL}/`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
